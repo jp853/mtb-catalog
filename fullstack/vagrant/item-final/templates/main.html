@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <title>MTB Trails App</title>
+    </head>
+    <body>
+        <div class="overflow">
+            {% if 'username' in session %}
+            <img class="avatar" src="{{ session.picture }}">
+            <a class="signout-button" href="{{ url_for('disconnect') }}">Sign out</a>
+
+            {% else %}
+            <a class="signin-button" href="{{ url_for('showLogin') }}">Sign In</a>
+            {% endif %}
+
+        </div>
+
+        {% block body %}
+        {% endblock %}
+
+        <script>
+            $('.avatar').click(function() {
+                $('.signout-button').toggleClass('display')
+            });
+            $(document).click(function() {
+                if ( (!$(event.target).closest('.avatar').length)
+                && (!$(event.target).closest('.signout-button').length) ) {
+                    if ($('.signout-button').hasClass('display')) {
+                        $('.signout-button').removeClass('display')
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

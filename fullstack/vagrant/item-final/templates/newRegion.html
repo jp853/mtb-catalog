@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+{% block body %}
+    <a class="back-link" href="{{ url_for('showRegions') }}">Back to All Regions</a>
+    <div class="jumbotron">
+      <h2>Is there a region we haven't covered yet?</h2>
+      <p>Add it in below.</p>
+    </div>
+    <div class="form-container">
+        <form method="POST" action="{{ url_for('newRegion') }}" enctype="multipart/form-data">
+            <label>Name:</label>
+            <br>
+            <div class="error">{{ error }}</div>
+            <input class="text-input" type="text" name="name" placeholder="New region name">
+            <br>
+            <br>
+            <input class="submit-input" type="submit" value="Create"> | <a href="{{ url_for('showRegions') }}">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

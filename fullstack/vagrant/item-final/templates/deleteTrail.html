@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+{% block body %}
+    <a class="back-link" href="{{ url_for('showTrails', region_id = region_id) }}">Back to Trails</a>
+    <div class="form-container">
+        <h2>Are you sure you want to delete "{{ item.name }}" from <span style="text-decoration: underline">{{ region.name }}</span>'s trail?</h2>
+
+        <div class="error">{{ error }}</div>
+
+        <form method="POST" action="{{ url_for('deleteTrail', region_id = region_id, trail_id = trail_id) }}" enctype="multipart/form-data">
+            <input class="submit-input" type="submit" value="Delete"> | <a href="{{ url_for('showTrails', region_id = region_id) }}">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

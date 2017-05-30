@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% block body %}
+    <a class="back-link" href="{{ url_for('showTrails', region_id = region_id) }}">Back to Trail</a>
+    <div class="form-container">
+        <h2>Rename <span style="text-decoration: underline">{{ region.name }}</span></h2>
+        <form method="POST" action="{{ url_for('editRegion', region_id = region_id) }}" enctype="multipart/form-data">
+            <label>Name:</label>
+            <br>
+            <div class="error">{{ error }}</div>
+            <input class="text-input" type="text" size="30" name="name" value="{{ region.name }}">
+            <br>
+            <br>
+            <input class="submit-input" type="submit" value="Rename"> | <a href="{{ url_for('showTrails', region_id = region_id) }}">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

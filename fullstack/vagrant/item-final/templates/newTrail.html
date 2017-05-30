@@ -1,0 +1,54 @@
+
+
+{% extends "main.html" %}
+{% block body %}
+    <a class="back-link" href="{{ url_for('showTrails', region_id = region_id) }}">Back to Trails</a>
+    <div class="jumbotron">
+          <h2>Add a new trail <span style="text-decoration: underline">{{ region.name }}</span>'s Trail Network</h2>
+        </div>
+    <div class="form-container">
+        <div class="error">{{ error }}</div>
+        <form method="POST" action="{{ url_for('newTrail', region_id = region_id) }}" enctype="multipart/form-data">
+            <label>Name:</label>
+            <br>
+            <div class="error">{{ name_error }}</div>
+            <input class="text-input" type="text" name="name" placeholder="Name of trail" value="{{ name }}">
+            <br>
+            <br>
+
+            <label>City:</label>
+            <br>
+            <div class="error">{{ price_error }}</div>
+            <input class="text-input" type="text" name="city" placeholder="city" value="{{ city }}">
+            <br>
+            <br>
+
+            <label>Description:</label>
+            <br>
+            <div class="error">{{ description_error }}</div>
+            <textarea name="description" placeholder="Add a description of the trail here">{{ description }}</textarea>
+            <br>
+            <br>
+
+            <label>Difficulty:</label>
+            <br>
+            <div class="error">{{ course_error }}</div>
+            <input type="radio" name="difficulty" value="Beginner" {% if course == 'Beginner' %}checked{% endif %}>
+            <label>Beginner</label>
+            <br>
+            <input type="radio" name="difficulty" value="Intermediate" {% if course == 'Intermediate' %}checked{% endif %}>
+            <label>Intermediate</label>
+            <br>
+            <input type="radio" name="difficulty" value="Intermediate-Advanced" {% if course == 'Intermediate-Advanced' %}checked{% endif %}>
+            <label>Intermediate-Advanced</label>
+            <br>
+            <input type="radio" name="difficulty" value="Advanced" {% if course == 'Advanced' %}checked{% endif %}>
+            <label>Advanced</label>
+            <br>
+            <br>
+
+            <input class="submit-input" type="submit" value="Add"> | <a href="{{ url_for('showTrails', region_id = region_id) }}">Cancel</a>
+        </form>
+    </div>
+
+{% endblock %}

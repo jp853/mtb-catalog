@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+{% block body %}
+
+    <div class="jumbotron">
+        <h1>Wecome To MTB Trails App</h1>
+        <p style="text-align: center;">Add in your favorite MTB Trails within the western United States</p>
+    </div>
+    <main>
+        <a class="link" href="{{ url_for('newRegion') }}">Add a New Region</a>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div class="regions">
+        {% for region in regions %}
+            <div class="region-item" onclick="location.href='{{ url_for('showTrails', region_id = region.region_id) }}';">
+                <h2 class="region-name">{{ region.name }}</h2>
+            </div>
+            <br>
+        {% endfor %}
+        </div>
+    </main>
+
+{% endblock %}

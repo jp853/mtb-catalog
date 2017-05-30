@@ -1,0 +1,56 @@
+{% extends "main.html" %}
+{% block body %}
+    <a class="back-link" href="{{ url_for('showRegions') }}">Back to All Regions</a>
+    <br>
+    <br>
+    <div>
+        <span class="center">
+            <a href="{{ url_for('editRegion', region_id = region.region_id) }}">Rename</a> |
+            <a href="{{ url_for('deleteRegion', region_id = region.region_id ) }}">Delete</a>
+        </span>
+    </div>
+
+    <div class="trail-container">
+        <h1 class="trail-name"><span style="text-decoration: underline">{{ region.name }}</span>'s Trails</h1>
+        <br>
+        <br>
+        <a href="{{ url_for('newTrail', region_id = region_id) }}">Add a New Trail</a>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <hr>
+                <ul class="flash">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+
+
+        {% if items !=[] %}
+        <hr>
+            <h2>{{region.name}} Trails</h2>
+                {% for i in trails %}
+
+                    <div>
+                        <h3 style="text-decoration:underline">{{i.name}}</h3>
+                        <p><strong>Description: </strong>{{i.description}}</p>
+                        <p><strong>City: </strong>{{i.city}}</p>
+                        <p><strong>Difficulty: </strong>{{i.difficulty}}</p>
+                        <a href='{{url_for('editTrail', region_id = region.region_id, trail_id=i.trail_id ) }}'>Edit</a> |
+                        <a href='{{url_for('deleteTrail', region_id = region.region_id, trail_id=i.trail_id ) }}'>Delete</a>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+        {% endif %}
+
+
+
+    </div>
+
+{% endblock %}

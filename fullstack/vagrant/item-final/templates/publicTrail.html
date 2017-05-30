@@ -1,0 +1,44 @@
+{% extends "main.html" %}
+{% block body %}
+    <a class="back-link" href="{{ url_for('showRegions') }}">Back to All Regions</a>
+    <br>
+    <br>
+
+    <div class="trail-container">
+        <h1><span style="text-decoration: underline">{{ region.name }}</span>'s Trails</h1>
+
+        <p class="center">Created by: {{ creator.name }}</p>
+        <img class="center" src="{{ creator.picture }}">
+        <br>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <hr>
+                <ul class="flash">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% if items !=[] %}
+        <hr>
+            <h2 class="name">{{region.name}} Trails</h2>
+                {% for i in trails %}
+
+                    <div>
+                        <h3 style="text-decoration: underline;">{{i.name}}</h3>
+                        <p><strong>Description: </strong>{{i.description}}</p>
+                        <p><strong>City: </strong>{{i.city}}</p>
+                        <p><strong>Difficulty: </strong>{{i.difficulty}}</p>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
